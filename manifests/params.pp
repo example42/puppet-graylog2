@@ -23,7 +23,7 @@ class graylog2::params {
   $elasticsearch_template = 'graylog2/elasticsearch.yml.erb'
   $elasticsearch_path = '/etc/graylog2-elasticsearch.yml'
   $version = '0.11.0'
-  $base_url_default = 'http:://download.graylog2.org/graylog2-server/'
+  $base_url_default = 'http://download.graylog2.org/graylog2-server/'
 
   $install_source        = ''
   $install_destination   = '/opt'
