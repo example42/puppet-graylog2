@@ -37,7 +37,14 @@ class graylog2::service {
         provider   => 'init',
       }
       file { '/etc/init.d/graylog2-server':
-        ensure  => "${graylog2::home}/bin/graylog2ctl",
+        ensure  => $graylog2::manage_file,
+        mode    => '0755',
+        owner   => 'root',
+        group   => 'root',
+        content => template($graylog2::init_script_template),
+        replace => $graylog2::manage_file_replace,
+        audit   => $graylog2::manage_audit,
+        noop    => $graylog2::bool_noops,
         before  => Service['graylog2-server'],
       }
     }

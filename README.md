@@ -8,6 +8,8 @@ Official site: http://www.example42.com
 
 Official git repository: http://github.com/example42/puppet-graylog2
 
+Module development sponsored by [AllOver.IO](http://www.allover.io)
+
 Released under the terms of Apache 2 License.
 
 This module requires functions provided by the Example42 Puppi module (you need it even if you don't use and install Puppi)
@@ -32,6 +34,17 @@ For detailed info about the logic and usage patterns of Example42 modules check 
         class { 'graylog2':
           elasticsearch_path  => 'site/graylog2/elasticsearch.yml.erb',
         }
+
+* Provide mongodb autentication details
+
+        class { 'graylog2':
+          mongo_db_host     => 'mongo.example42.com', # Default 127.0.0.1
+          mongo_db_port     => '27020', # Default 27017
+          mongo_db_name     => 'grey', # Default graylog2
+          mongo_db_user     => 'grey', # Default grayloguser
+          mongo_db_password => 'mypw', # Default 123 - CHANGE IT!
+        }
+
 
 * Disable graylog2 service.
 

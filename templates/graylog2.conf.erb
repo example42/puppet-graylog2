@@ -85,12 +85,12 @@ ring_size = 1024
 
 # MongoDB Configuration
 mongodb_useauth = true
-mongodb_user = grayloguser
-mongodb_password = 123
-mongodb_host = 127.0.0.1
+mongodb_user = <%= scope.lookupvar('graylog2::mongo_user') %>
+mongodb_password = <%= scope.lookupvar('graylog2::mongo_password') %>
+mongodb_host = <%= scope.lookupvar('graylog2::mongo_db_host') %>
 #mongodb_replica_set = localhost:27017,localhost:27018,localhost:27019
-mongodb_database = graylog2
-mongodb_port = 27017
+mongodb_database = <%= scope.lookupvar('graylog2::mongo_db_name') %>
+mongodb_port = <%= scope.lookupvar('graylog2::mongo_db_port') %>
 
 # Raise this according to the maximum connections your MongoDB server can handle if you encounter MongoDB connection problems.
 mongodb_max_connections = 100

@@ -5,11 +5,13 @@
 #
 # == Parameters
 #
-# [*install_prerequisites*]
-#   Set to false if you don't want install this module's prerequisites.
-#   (It may be useful if the resources provided the prerequisites are already
-#   managed by some other modules). Default: true
-#   Prerequisites are based on Example42 modules set.
+# [*dependencies_class*]
+#   The name of the class that installs dependencies and prerequisite
+#   resources needed by this module.
+#   Default is $graylog2::dependencies which uses Example42 modules.
+#   Set to '' false to not install any dependency (you must provide what's
+#   defined in graylog2/manifests/dependencies.pp in some way).
+#   Set directy the name of a custom class to manage there the dependencies
 #
 # [*create_user*]
 #   Set to true if you want the module to create the process user of graylog2
@@ -234,7 +236,7 @@
 # See README for usage patterns.
 #
 class graylog2 (
-  $install_prerequisites = params_lookup( 'install_prerequisites' ),
+  $dependencies_class = params_lookup( 'dependencies_class' ),
   $create_user           = params_lookup( 'create_user' ),
   $install               = params_lookup( 'install' ),
   $install_source        = params_lookup( 'install_source' ),
@@ -243,6 +245,11 @@ class graylog2 (
   $init_script_template  = params_lookup( 'init_script_template' ),
   $elasticsearch_template  = params_lookup( 'elasticsearch_template' ),
   $elasticsearch_path      = params_lookup( 'elasticsearch_path' ),
+  $mongo_db_host         = params_lookup( 'mongo_db_host' ),
+  $mongo_db_port         = params_lookup( 'mongo_db_port' ),
+  $mongo_db_name         = params_lookup( 'mongo_db_name' ),
+  $mongo_user            = params_lookup( 'mongo_user' ),
+  $mongo_password        = params_lookup( 'mongo_password' ),
   $java_opts             = params_lookup( 'java_opts' ),
   $my_class              = params_lookup( 'my_class' ),
   $source                = params_lookup( 'source' ),
@@ -250,7 +257,6 @@ class graylog2 (
   $source_dir_purge      = params_lookup( 'source_dir_purge' ),
   $template              = params_lookup( 'template' ),
   $service_autorestart   = params_lookup( 'service_autorestart' , 'global' ),
-  $options               = params_lookup( 'options' ),
   $version               = params_lookup( 'version' ),
   $absent                = params_lookup( 'absent' ),
   $disable               = params_lookup( 'disable' ),
@@ -288,7 +294,6 @@ class graylog2 (
   $protocol              = params_lookup( 'protocol' )
   ) inherits graylog2::params {
 
-  $bool_install_prerequisites=any2bool($install_prerequisites)
   $bool_create_user=any2bool($create_user)
   $bool_source_dir_purge=any2bool($source_dir_purge)
   $bool_service_autorestart=any2bool($service_autorestart)
@@ -389,10 +394,26 @@ class graylog2 (
     default => $graylog2::config_dir,
   }
 
+  $real_log_dir = $graylog2::log_dir ? {
+    ''      => $graylog2::install ? {
+      package => '/var/log/graylog2',
+      default => "${graylog2::home}/log",
+    },
+    default => $graylog2::log_dir,
+  }
+
+  $real_log_file = $graylog2::log_file ? {
+    ''      => $graylog2::install ? {
+      package => '/var/log/graylog2/graylog2-server.log',
+      default => "${graylog2::home}/log/graylog2-server.log",
+    },
+    default => $graylog2::log_file,
+  }
+
   ### Managed resources
 
-  if $graylog2::bool_install_prerequisites {
-    class { 'graylog2::prerequisites':
+  if $graylog2::dependencies_class != '' {
+    class { $graylog2::dependencies_class:
       before => Class['graylog2::install'],
     }
   }
