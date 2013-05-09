@@ -12,24 +12,42 @@
 #
 class graylog2::dependencies {
 
-  include java
-  include elasticsearch
-  include mongodb
-  if $graylog2::mongo_db_host == '127.0.0.1'
-  or $graylog2::mongo_db_host == 'localhost' {
-    mongodb::user { $graylog2::mongo_user:
-      db_name  => $graylog2::mongo_db_name,
-      password => $graylog2::mongo_password,
+  # Dependencies for graylog2-server
+  if $graylog2::install == 'source'
+  or $graylog2::install == 'puppi' {
+    include java
+    include elasticsearch
+    include mongodb
+    if $graylog2::mongo_db_host == '127.0.0.1'
+    or $graylog2::mongo_db_host == 'localhost' {
+      mongodb::user { $graylog2::mongo_user:
+        db_name  => $graylog2::mongo_db_name,
+        password => $graylog2::mongo_password,
+      }
+    } else {
+      # Totally untested - Requires storeconfigs
+      # Collect on mongo_db_host with something like:
+      # Mongodb::User <<| tag == "mongo_user_${ipaddress}"|>>
+      # Mongodb::User <<| tag == "mongo_user_${fqdn}"|>>
+      @@mongodb::user { $graylog2::mongo_user:
+        db_name  => $graylog2::mongo_db_name,
+        password => $graylog2::mongo_password,
+        tag      => "mongo_user_$graylog2::mongo_db_host",
+      }
     }
-  } else {
-    # Totally untested - Requires storeconfigs
-    # Collect on mongo_db_host with something like:
-    # Mongodb::User <<| tag == "mongo_user_${ipaddress}"|>>
-    # Mongodb::User <<| tag == "mongo_user_${fqdn}"|>>
-    @@mongodb::user { $graylog2::mongo_user:
-      db_name  => $graylog2::mongo_db_name,
-      password => $graylog2::mongo_password,
-      tag      => "mongo_user_$graylog2::mongo_db_host",
+  }
+
+  # Dependencies for graylog2-web-interface
+  if $graylog2::webinterface_install == 'source'
+  or $graylog2::webinterface_install == 'puppi' {
+    bundler::install { 'graylog2-webinterface':
+      path => $graylog2::webinterface_home,
+      require => Class['graylog2::webinterface'],
+    }
+
+    case $graylog2::webinterface_webserver {
+      'apache': { include graylog2::webinterface::apache }
+      default : { }
     }
   }
 

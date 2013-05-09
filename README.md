@@ -19,7 +19,7 @@ For detailed info about the logic and usage patterns of Example42 modules check 
 
 ## USAGE - Basic management
 
-* Install graylog2 with default settings, that is installation from official site, run as graylog2 user
+$* Install graylog2 with default settings, that is installation from official site, run as graylog2 user. It installs also the web interface, by default
 
         class { 'graylog2': }
 
@@ -28,6 +28,28 @@ For detailed info about the logic and usage patterns of Example42 modules check 
         class { 'graylog2':
           version => '0.11.0',
         }
+
+* Web Interface specific parameters
+
+        class { 'graylog2':
+          webinterface_install             => 'package',     # Default: source
+          webinterface_package             => 'my-graylog2', # Default: graylog2-web-interface
+          webinterface_install_destination => '/usr/local', # Default /opt
+          webinterface_webserver           => 'nginx',  # Default (and currently only supported) apache
+        }
+
+* Install only syslog2-server without web-interface
+
+        class { 'graylog2':
+          webinterface_install => false,     # Default: source
+        }
+
+* Install only syslog2-web-interface without syslog2-server
+
+        class { 'graylog2':
+          install => false,     # Default: source
+        }
+
 
 * Provide a custom template for elasticsearch configuration file
 

@@ -23,7 +23,7 @@ class graylog2::params {
   $elasticsearch_template = 'graylog2/elasticsearch.yml.erb'
   $elasticsearch_path = '/etc/graylog2-elasticsearch.yml'
   $version = '0.11.0'
-  $base_url_default = 'http://download.graylog2.org/graylog2-server'
+  $base_url_default = 'http://download.graylog2.org'
 
   $mongo_db_host = '127.0.0.1'
   $mongo_db_port = '27017'
@@ -31,13 +31,19 @@ class graylog2::params {
   $mongo_user = 'grayloguser'
   $mongo_password = '123'
 
+  $webinterface_install               = 'source'
+  $webinterface_install_source        = ''
+  $webinterface_install_destination   = '/opt'
+  $webinterface_package               = 'graylog2-web-interface'
+  $webinterface_webserver             = 'apache'
+
   $install_source        = ''
   $install_destination   = '/opt'
   $init_config_template  = 'graylog2/graylog2-wrapper.conf.erb'
   $init_script_template  = 'graylog2/graylog2.init.erb'
 
   $package = $::operatingsystem ? {
-    default => 'graylog2',
+    default => 'graylog2-server',
   }
 
   $service = $::operatingsystem ? {
