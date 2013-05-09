@@ -35,6 +35,7 @@ class graylog2::params {
   $webinterface_install_source        = ''
   $webinterface_install_destination   = '/opt'
   $webinterface_package               = 'graylog2-web-interface'
+  $webinterface_virtualhost           = "graylog2.${::domain}"
   $webinterface_webserver             = 'apache'
 
   $install_source        = ''

@@ -9,12 +9,12 @@
 #
 class graylog2::webinterface::apache {
 
-/*
-  apache::vhost { $graylog2::web_virtualhost :
-    template => $graylog2::real_web_server_template,
-    docroot  => $graylog2::real_data_dir,
-  }
-*/
+  include apache::passenger
+  apache::vhost { $graylog2::webinterface_virtualhost :
+    docroot             => $graylog2::webinterface_home,
+    passenger           => true,
+    passenger_rails_env => 'production',
+ }
 
 }
 
