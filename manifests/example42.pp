@@ -19,7 +19,7 @@ class graylog2::example42 {
 
   ### Service monitoring, if enabled ( monitor => true )
   if $graylog2::bool_monitor == true {
-    if $graylog2::port != '' {
+    if $graylog2::protocol == 'tcp' {
       monitor::port { "graylog2_${graylog2::protocol}_${graylog2::port}":
         protocol => $graylog2::protocol,
         port     => $graylog2::port,

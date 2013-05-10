@@ -11,7 +11,7 @@ class graylog2::webinterface::apache {
 
   include apache::passenger
   apache::vhost { $graylog2::webinterface_virtualhost :
-    docroot             => $graylog2::webinterface_home,
+    docroot             => "${graylog2::webinterface_home}/public",
     passenger           => true,
     passenger_rails_env => 'production',
  }

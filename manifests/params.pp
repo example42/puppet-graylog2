@@ -113,7 +113,7 @@ class graylog2::params {
   }
 
   $port = '514'
-  $protocol = 'tcp'
+  $protocol = 'udp'
 
   # General Settings
   $my_class = ''
