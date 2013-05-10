@@ -12,7 +12,7 @@ class graylog2::user {
     ensure     => $graylog2::manage_file,
     comment    => "${graylog2::process_user} user",
     password   => '!',
-    managehome => true,
+    managehome => false,
     home       => $graylog2::home,
     shell      => '/bin/bash',
   }
