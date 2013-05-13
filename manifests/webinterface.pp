@@ -65,4 +65,15 @@ class graylog2::webinterface {
 
   }
 
+  file { 'graylog2-mongoid.yml':
+    ensure  => $graylog2::manage_file,
+    path    => "${graylog2::webinterface_home}/config/mongoid.yml" ,
+    mode    => $graylog2::config_file_mode,
+    owner   => $graylog2::config_file_owner,
+    group   => $graylog2::config_file_group,
+    content => template('graylog2/mongoid.yml.erb'),
+    replace => $graylog2::manage_file_replace,
+    audit   => $graylog2::manage_audit,
+    noop    => $graylog2::bool_noops,
+  }
 }
