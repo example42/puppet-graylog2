@@ -242,6 +242,7 @@ class graylog2 (
   $webinterface_virtualhost         = params_lookup( 'webinterface_virtualhost'),
   $webinterface_webserver           = params_lookup( 'webinterface_webserver'),
   $webinterface_package             = params_lookup( 'webinterface_package'),
+  $webinterface_nit_script_template = params_lookup( 'webinterface_init_script_template'),
   $dependencies_class    = params_lookup( 'dependencies_class' ),
   $create_user           = params_lookup( 'create_user' ),
   $install               = params_lookup( 'install' ),

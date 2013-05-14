@@ -1,0 +1,75 @@
+#!/bin/bash
+# File Managed by Puppet
+
+CMD=$1
+NOHUP=`which nohup`
+
+GRAYLOG2_HOME=<%= scope.lookupvar('graylog2::webinterface_home') %>
+GRAYLOG2_SERVER_JAR=graylog2-webinterface.jar
+GRAYLOG2_CONF=<%= scope.lookupvar('graylog2::config_file') %>
+GRAYLOG2_PID=$GRAYLOG2_HOME/log/graylog2-webinterface.pid
+LOG_FILE=$GRAYLOG2_HOME/log/production-log
+
+start() {
+    echo "Starting graylog2-webinterface ..."
+    cd "$GRAYLOG2_HOME"
+    exec sudo bundle exec rails server  >> ${LOG_FILE} && touch ${GRAYLOG2_PID}  &
+    echo "graylog2-web-interface_running"
+}
+
+stop() {
+    PID=`cat ${GRAYLOG2_PID}`
+    echo "Stopping graylog2-webinterface ($PID) ..."
+    if kill $PID; then
+        rm ${GRAYLOG2_PID}
+    fi
+}
+
+restart() {
+    echo "Restarting graylog2-webinterface ..."
+    stop
+    start
+}
+
+status() {
+    pid=$(get_pid)
+    if [ ! -z $pid ]; then
+        if pid_running $pid; then
+            echo "graylog2-webinterface running as pid $pid"
+            return 0
+        else
+            echo "Stale pid file with $pid - removing..."
+            rm ${GRAYLOG2_PID}
+        fi
+    fi
+
+    echo "graylog2-webinterface not running"
+    exit 1
+}
+
+get_pid() {
+    cat ${GRAYLOG2_PID} 2> /dev/null
+}
+
+pid_running() {
+    kill -0 $1 2> /dev/null
+}
+
+case "$CMD" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage $0 {start|stop|restart|status}"
+        RETVAL=1
+esac
+

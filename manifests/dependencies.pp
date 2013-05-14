@@ -49,8 +49,19 @@ class graylog2::dependencies {
 
     case $graylog2::webinterface_webserver {
       'apache': { include graylog2::webinterface::apache }
+      'webrick': { include graylog2::webinterface::webrick }
       default : { }
     }
+  }
+
+  # Ruby 1.9.3 required
+  $ruby_package = $::operatingsystem ? {
+    /(?i:Debian|Ubuntu|Mint)/       => 'ruby1.9.3',
+    default                         => 'ruby',
+  }
+
+  class { 'ruby':
+    package => $ruby_package,
   }
 
 }
