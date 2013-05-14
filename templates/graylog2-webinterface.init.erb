@@ -8,7 +8,9 @@ GRAYLOG2_HOME=<%= scope.lookupvar('graylog2::webinterface_home') %>
 GRAYLOG2_SERVER_JAR=graylog2-webinterface.jar
 GRAYLOG2_CONF=<%= scope.lookupvar('graylog2::config_file') %>
 GRAYLOG2_PID=$GRAYLOG2_HOME/log/graylog2-webinterface.pid
+LOG_DIR=$GRAYLOG2_HOME/log
 LOG_FILE=$GRAYLOG2_HOME/log/production-log
+mkdir -p $LOG_DIR
 
 start() {
     echo "Starting graylog2-webinterface ..."
