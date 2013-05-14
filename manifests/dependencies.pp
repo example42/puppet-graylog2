@@ -61,7 +61,8 @@ class graylog2::dependencies {
   }
 
   class { 'ruby':
-    package => $ruby_package,
+    version             => '1.9.3-p392',
+    compile_from_source => true,
   }
 
 }
