@@ -20,7 +20,7 @@ class graylog2::webinterface {
         ensure => $graylog2::manage_package,
         name   => $graylog2::webinterface_package,
         noop   => $graylog2::bool_noops,
-        before => File['graylog2-webinterface_link'],
+        before => File['graylog2-mongoid.yml'],
       }
     }
 
@@ -32,7 +32,7 @@ class graylog2::webinterface {
         owner               => $graylog2::process_user,
         group               => $graylog2::process_group,
         noop                => $graylog2::bool_noops,
-        before              => File['graylog2-webinterface_link'],
+        before              => File['graylog2-mongoid.yml'],
       }
 
       file { 'graylog2-webinterface_link':
@@ -54,7 +54,7 @@ class graylog2::webinterface {
         auto_deploy => true,
         enable      => true,
         noop        => $graylog2::bool_noops,
-        before      => File['graylog2-webinterface_link'],
+        before      => File['graylog2-mongoid.yml'],
       }
 
       file { 'graylog2-webinterface_link':
