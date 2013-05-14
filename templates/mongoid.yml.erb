@@ -1,4 +1,4 @@
-production:
+<%= scope.lookupvar('graylog2::webinterface_rails_environment') %>:
   host: <%= scope.lookupvar('graylog2::mongo_db_host') %>
   port: <%= scope.lookupvar('graylog2::mongo_db_port') %>
   username: <%= scope.lookupvar('graylog2::mongo_user') %>

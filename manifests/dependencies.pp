@@ -53,16 +53,16 @@ class graylog2::dependencies {
       default : { }
     }
 
-    # Ruby 1.9.3 required
+    # Ruby 1.9.3 required. Installed from source.
     $ruby_package = $::operatingsystem ? {
       /(?i:Debian|Ubuntu|Mint)/       => 'ruby1.9.3',
       default                         => 'ruby',
     }
 
-#    class { 'ruby':
-#      version             => '1.9.3-p392',
-#      compile_from_source => true,
-#    }
+    class { 'ruby':
+      version             => '1.9.3-p392',
+      compile_from_source => true,
+    }
 
   }
 

@@ -38,6 +38,7 @@ class graylog2::params {
   $webinterface_virtualhost           = "graylog2.${::domain}"
   $webinterface_webserver             = 'webrick'
   $webinterface_init_script_template  = 'graylog2/graylog2-webinterface.init.erb'
+  $webinterface_rails_environment     = 'production'
 
   $install_source        = ''
   $install_destination   = '/opt'
