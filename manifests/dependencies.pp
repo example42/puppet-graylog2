@@ -44,7 +44,7 @@ class graylog2::dependencies {
       install_path => $graylog2::webinterface_home,
       unless       => "gem list | grep rails",
       refreshonly  => false,
-      require      => Class['graylog2::webinterface'],
+      require      => [ Class['ruby'] , Class['graylog2::webinterface'] ],
     }
 
     case $graylog2::webinterface_webserver {
@@ -52,17 +52,18 @@ class graylog2::dependencies {
       'webrick': { include graylog2::webinterface::webrick }
       default : { }
     }
-  }
 
-  # Ruby 1.9.3 required
-  $ruby_package = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/       => 'ruby1.9.3',
-    default                         => 'ruby',
-  }
+    # Ruby 1.9.3 required
+    $ruby_package = $::operatingsystem ? {
+      /(?i:Debian|Ubuntu|Mint)/       => 'ruby1.9.3',
+      default                         => 'ruby',
+    }
 
-  class { 'ruby':
-    version             => '1.9.3-p392',
-    compile_from_source => true,
+    class { 'ruby':
+      version             => '1.9.3-p392',
+      compile_from_source => true,
+    }
+
   }
 
 }
