@@ -38,13 +38,13 @@ $* Install graylog2 with default settings, that is installation from official si
           webinterface_webserver           => 'nginx',  # Default (and currently only supported) apache
         }
 
-* Install only syslog2-server without web-interface
+* Install only graylog2-server without web-interface
 
         class { 'graylog2':
           webinterface_install => false,     # Default: source
         }
 
-* Install only syslog2-web-interface without syslog2-server
+* Install only graylog2-web-interface without graylog2-server
 
         class { 'graylog2':
           install => false,     # Default: source
