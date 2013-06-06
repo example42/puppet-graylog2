@@ -1,14 +1,13 @@
 # Class: graylog2::dependencies
 #
-# This class installs graylog2 prerequisites
+# This class installs graylog2 dependencies
 #
 # == Usage
 #
 # This class is not intended to be used directly.
-# It's automatically included by graylog2 if the parameter
-# install_prerequisites is set to true
-# Note: This class may contain resources available on the
-# Example42 modules set
+# It's automatically included by default in graylog2 by the parameter
+# dependencies_class. You may provide an laternative class name to
+# provide the same resources (eventually not using Example42 modules)
 #
 class graylog2::dependencies {
 
