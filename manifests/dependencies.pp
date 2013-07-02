@@ -41,7 +41,7 @@ class graylog2::dependencies {
   or $graylog2::webinterface_install == 'puppi' {
     bundler::install { 'graylog2-webinterface':
       install_path => $graylog2::webinterface_home,
-      unless       => "gem list | grep rails",
+      unless       => 'which rails',
       refreshonly  => false,
       require      => [ Class['ruby'] , Class['graylog2::webinterface'] ],
     }
