@@ -16,7 +16,8 @@ start() {
     echo "Starting graylog2-webinterface ..."
     cd "$GRAYLOG2_HOME"
     export RAILS_ENV=<%= scope.lookupvar('graylog2::webinterface_rails_environment') %>
-    exec bundle exec rails server >> ${GRAYLOG2_LOG_FILE} && touch ${GRAYLOG2_PID}  &
+    exec bundle exec rails server >> ${GRAYLOG2_LOG_FILE} &
+    echo $! > ${GRAYLOG2_PID}
     echo "graylog2-web-interface_running"
 }
 
