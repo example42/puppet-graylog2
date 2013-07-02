@@ -7,7 +7,7 @@ NOHUP=`which nohup`
 GRAYLOG2_HOME=<%= scope.lookupvar('graylog2::webinterface_home') %>
 GRAYLOG2_SERVER_JAR=graylog2-webinterface.jar
 GRAYLOG2_CONF=<%= scope.lookupvar('graylog2::config_file') %>
-GRAYLOG2_PID=$GRAYLOG2_HOME/log/graylog2-webinterface.pid
+GRAYLOG2_PID=$GRAYLOG2_HOME/tmp/pids/server.pid
 GRAYLOG2_LOG_DIR=$GRAYLOG2_HOME/log
 GRAYLOG2_LOG_FILE=$GRAYLOG2_HOME/log/<%= scope.lookupvar('graylog2::webinterface_rails_environment') %>.log
 mkdir -p $GRAYLOG2_LOG_DIR
@@ -17,14 +17,14 @@ start() {
     cd "$GRAYLOG2_HOME"
     export RAILS_ENV=<%= scope.lookupvar('graylog2::webinterface_rails_environment') %>
     exec bundle exec rails server >> ${GRAYLOG2_LOG_FILE} &
-    echo $! > ${GRAYLOG2_PID}
+#    echo $! > ${GRAYLOG2_PID}
     echo "graylog2-web-interface_running"
 }
 
 stop() {
     PID=`cat ${GRAYLOG2_PID}`
     echo "Stopping graylog2-webinterface ($PID) ..."
-    if kill $PID; then
+    if kill -9 $PID; then
         rm ${GRAYLOG2_PID}
     fi
 }
