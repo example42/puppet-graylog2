@@ -387,12 +387,12 @@ class graylog2 (
 
   ### Internal vars depending on user's input
   $real_install_source = $graylog2::install_source ? {
-    ''      => "${graylog2::params::base_url_default}/graylog2-server/releases/download/graylog2-server-${graylog2::version}.tar.gz",
+    ''      => "${graylog2::params::base_url_default}/graylog2-server/releases/download/${graylog2::version}/graylog2-server-${graylog2::version}.tar.gz",
     default => $graylog2::install_source,
   }
   $real_webinterface_install_source = $graylog2::webinterface_install_source ? {
 #    ''      => "http://download.graylog2.org/graylog2-server/graylog2-web-interface-${graylog2::version}.tar.gz",
-    ''      => "${graylog2::params::base_url_default}/graylog2-web-interface/releases/download/graylog2-web-interface-${graylog2::version}.tar.gz",
+    ''      => "${graylog2::params::base_url_default}/graylog2-web-interface/releases/download/${graylog2::version}/graylog2-web-interface-${graylog2::version}.tar.gz",
     default => $graylog2::install_source,
   }
 
