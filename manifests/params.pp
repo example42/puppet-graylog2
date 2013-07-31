@@ -23,7 +23,7 @@ class graylog2::params {
   $elasticsearch_template = 'graylog2/elasticsearch.yml.erb'
   $elasticsearch_path = '/etc/graylog2-elasticsearch.yml'
   $version = '0.11.0'
-  $base_url_default = 'http://download.graylog2.org'
+  $base_url_default = 'https://github.com/Graylog2'
 
   $mongo_db_host = '127.0.0.1'
   $mongo_db_port = '27017'
