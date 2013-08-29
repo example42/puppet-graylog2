@@ -36,7 +36,7 @@ class graylog2::webinterface {
       }
 
       file { 'graylog2-webinterface_link':
-        ensure => "${graylog2::webinterface_home}" ,
+        ensure => $graylog2::webinterface_home,
         path   => "${graylog2::install_destination}/graylog2-web-interface",
         noop   => $graylog2::bool_noops,
       }
@@ -58,7 +58,7 @@ class graylog2::webinterface {
       }
 
       file { 'graylog2-webinterface_link':
-        ensure => "${graylog2::webinterface_home}" ,
+        ensure => $graylog2::webinterface_home,
         path   => "${graylog2::install_destination}/graylog2-web-interface",
         noop   => $graylog2::bool_noops,
       }

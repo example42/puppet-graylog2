@@ -31,7 +31,7 @@ class graylog2::dependencies {
       @@mongodb::user { $graylog2::mongo_user:
         db_name  => $graylog2::mongo_db_name,
         password => $graylog2::mongo_password,
-        tag      => "mongo_user_$graylog2::mongo_db_host",
+        tag      => "mongo_user_${graylog2::mongo_db_host}",
       }
     }
   }

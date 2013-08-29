@@ -7,7 +7,9 @@ fixtures:
     "concat": "git://github.com/example42/puppet-concat.git"
     "mongodb": "git://github.com/example42/puppet-mongodb.git"
     "elasticsearch": "git://github.com/example42/puppet-elasticsearch.git"
+    "bundler": "git://github.com/example42/puppet-bundler.git"
     "java": "git://github.com/example42/puppet-java.git"
+    "ruby": "git://github.com/example42/puppet-ruby.git"
     "git": "git://github.com/example42/puppet-git.git"
   symlinks:
     "graylog2": "#{source_dir}"

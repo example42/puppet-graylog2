@@ -4,7 +4,7 @@ describe 'graylog2' do
 
   let(:title) { 'graylog2' }
   let(:node) { 'rspec.example42.com' }
-  let(:facts) { { :ipaddress => '10.42.42.42' } }
+  let(:facts) { { :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu' } }
 
   describe 'Test standard installation' do
     it { should contain_package('graylog2').with_ensure('present') }
@@ -130,25 +130,25 @@ describe 'graylog2' do
   end
 
   describe 'Test params lookup' do
-    let(:facts) { { :monitor => true , :ipaddress => '10.42.42.42' } }
+    let(:facts) { { :monitor => true , :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu' } }
     let(:params) { { :port => '42' } }
     it 'should honour top scope global vars' do should contain_monitor__process('graylog2_process').with_enable('true') end
   end
 
   describe 'Test params lookup' do
-    let(:facts) { { :graylog2_monitor => true , :ipaddress => '10.42.42.42' } }
+    let(:facts) { { :graylog2_monitor => true , :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu' } }
     let(:params) { { :port => '42' } }
     it 'should honour module specific vars' do should contain_monitor__process('graylog2_process').with_enable('true') end
   end
 
   describe 'Test params lookup' do
-    let(:facts) { { :monitor => false , :graylog2_monitor => true , :ipaddress => '10.42.42.42' } }
+    let(:facts) { { :monitor => false , :graylog2_monitor => true , :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu'  } }
     let(:params) { { :port => '42' } }
     it 'should honour top scope module specific over global vars' do should contain_monitor__process('graylog2_process').with_enable('true') end
   end
 
   describe 'Test params lookup' do
-    let(:facts) { { :monitor => false , :ipaddress => '10.42.42.42' } }
+    let(:facts) { { :monitor => false , :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu' } }
     let(:params) { { :monitor => true , :firewall => true, :port => '42' } }
     it 'should honour passed params over global vars' do should contain_monitor__process('graylog2_process').with_enable('true') end
   end

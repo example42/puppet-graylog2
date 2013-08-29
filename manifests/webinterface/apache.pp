@@ -14,7 +14,7 @@ class graylog2::webinterface::apache {
     docroot             => "${graylog2::webinterface_home}/public",
     passenger           => true,
     passenger_rails_env => 'production',
- }
+  }
 
 }
 

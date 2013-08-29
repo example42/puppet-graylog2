@@ -37,7 +37,7 @@ class graylog2::install {
       }
 
       file { 'graylog2_link':
-        ensure => "${graylog2::home}" ,
+        ensure => $graylog2::home,
         path   => "${graylog2::install_destination}/graylog2",
         noop   => $graylog2::bool_noops,
       }
@@ -58,7 +58,7 @@ class graylog2::install {
       }
 
       file { 'graylog2_link':
-        ensure => "${graylog2::home}" ,
+        ensure => $graylog2::home,
         path   => "${graylog2::install_destination}/graylog2",
         noop   => $graylog2::bool_noops,
       }
