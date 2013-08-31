@@ -264,6 +264,7 @@ class graylog2 (
   $source_dir            = params_lookup( 'source_dir' ),
   $source_dir_purge      = params_lookup( 'source_dir_purge' ),
   $template              = params_lookup( 'template' ),
+  $options               = params_lookup( 'options' ),
   $service_autorestart   = params_lookup( 'service_autorestart' , 'global' ),
   $version               = params_lookup( 'version' ),
   $absent                = params_lookup( 'absent' ),

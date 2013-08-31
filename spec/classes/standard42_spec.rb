@@ -7,62 +7,26 @@ describe 'graylog2' do
   let(:facts) { { :ipaddress => '10.42.42.42' , :operatingsystem => 'Ubuntu' } }
 
   describe 'Test standard installation' do
-    it { should contain_package('graylog2').with_ensure('present') }
-    it { should contain_service('graylog2').with_ensure('running') }
-    it { should contain_service('graylog2').with_enable('true') }
+    it { should contain_puppi__netinstall('netinstall_graylog2').with_destination_dir('/opt') }
+    it { should contain_service('graylog2-server').with_ensure('running') }
+    it { should contain_service('graylog2-server').with_enable('true') }
     it { should contain_file('graylog2.conf').with_ensure('present') }
-  end
-
-  describe 'Test installation of a specific version' do
-    let(:params) { {:version => '1.0.42' } }
-    it { should contain_package('graylog2').with_ensure('1.0.42') }
   end
 
   describe 'Test standard installation with monitoring and firewalling' do
     let(:params) { {:monitor => true , :firewall => true, :port => '42', :protocol => 'tcp' } }
-    it { should contain_package('graylog2').with_ensure('present') }
-    it { should contain_service('graylog2').with_ensure('running') }
-    it { should contain_service('graylog2').with_enable('true') }
+    it { should contain_puppi__netinstall('netinstall_graylog2').with_destination_dir('/opt') }
+    it { should contain_service('graylog2-server').with_ensure('running') }
+    it { should contain_service('graylog2-server').with_enable('true') }
     it { should contain_file('graylog2.conf').with_ensure('present') }
     it { should contain_monitor__process('graylog2_process').with_enable('true') }
     it { should contain_firewall('graylog2_tcp_42').with_enable('true') }
   end
 
-  describe 'Test decommissioning - absent' do
-    let(:params) { {:absent => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
-    it 'should remove Package[graylog2]' do should contain_package('graylog2').with_ensure('absent') end
-    it 'should stop Service[graylog2]' do should contain_service('graylog2').with_ensure('stopped') end
-    it 'should not enable at boot Service[graylog2]' do should contain_service('graylog2').with_enable('false') end
-    it 'should remove graylog2 configuration file' do should contain_file('graylog2.conf').with_ensure('absent') end
-    it { should contain_monitor__process('graylog2_process').with_enable('false') }
-    it { should contain_firewall('graylog2_tcp_42').with_enable('false') }
-  end
-
-  describe 'Test decommissioning - disable' do
-    let(:params) { {:disable => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
-    it { should contain_package('graylog2').with_ensure('present') }
-    it 'should stop Service[graylog2]' do should contain_service('graylog2').with_ensure('stopped') end
-    it 'should not enable at boot Service[graylog2]' do should contain_service('graylog2').with_enable('false') end
-    it { should contain_file('graylog2.conf').with_ensure('present') }
-    it { should contain_monitor__process('graylog2_process').with_enable('false') }
-    it { should contain_firewall('graylog2_tcp_42').with_enable('false') }
-  end
-
-  describe 'Test decommissioning - disableboot' do
-    let(:params) { {:disableboot => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
-    it { should contain_package('graylog2').with_ensure('present') }
-    it { should_not contain_service('graylog2').with_ensure('present') }
-    it { should_not contain_service('graylog2').with_ensure('absent') }
-    it 'should not enable at boot Service[graylog2]' do should contain_service('graylog2').with_enable('false') end
-    it { should contain_file('graylog2.conf').with_ensure('present') }
-    it { should contain_monitor__process('graylog2_process').with_enable('false') }
-    it { should contain_firewall('graylog2_tcp_42').with_enable('true') }
-  end
-
   describe 'Test noops mode' do
     let(:params) { {:noops => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
-    it { should contain_package('graylog2').with_noop('true') }
-    it { should contain_service('graylog2').with_noop('true') }
+    it { should contain_puppi__netinstall('netinstall_graylog2').with_destination_dir('/opt') }
+    it { should contain_service('graylog2-server').with_noop('true') }
     it { should contain_file('graylog2.conf').with_noop('true') }
     it { should contain_monitor__process('graylog2_process').with_noop('true') }
     it { should contain_monitor__process('graylog2_process').with_noop('true') }
