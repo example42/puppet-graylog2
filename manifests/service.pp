@@ -22,7 +22,7 @@ class graylog2::service {
         enable     => $graylog2::manage_service_enable,
         hasstatus  => $graylog2::service_status,
         pattern    => $graylog2::process,
-        noop       => $graylog2::bool_noops,
+        noop       => $graylog2::noops,
       }
     }
 
@@ -33,7 +33,7 @@ class graylog2::service {
         enable     => $graylog2::manage_service_enable,
         hasstatus  => $graylog2::service_status,
         pattern    => $graylog2::process,
-        noop       => $graylog2::bool_noops,
+        noop       => $graylog2::noops,
         provider   => 'init',
       }
       file { '/etc/init.d/graylog2-server':
@@ -44,7 +44,7 @@ class graylog2::service {
         content => template($graylog2::init_script_template),
         replace => $graylog2::manage_file_replace,
         audit   => $graylog2::manage_audit,
-        noop    => $graylog2::bool_noops,
+        noop    => $graylog2::noops,
         before  => Service['graylog2-server'],
       }
     }

@@ -23,7 +23,7 @@ class graylog2::config {
     content => $graylog2::manage_file_content,
     replace => $graylog2::manage_file_replace,
     audit   => $graylog2::manage_audit,
-    noop    => $graylog2::bool_noops,
+    noop    => $graylog2::noops,
   }
 
   file { 'elasticsearch.yml':
@@ -35,7 +35,7 @@ class graylog2::config {
     content => $graylog2::elasticsearch_content,
     replace => $graylog2::manage_file_replace,
     audit   => $graylog2::manage_audit,
-    noop    => $graylog2::bool_noops,
+    noop    => $graylog2::noops,
   }
 
 
@@ -50,7 +50,7 @@ class graylog2::config {
       force   => $graylog2::bool_source_dir_purge,
       replace => $graylog2::manage_file_replace,
       audit   => $graylog2::manage_audit,
-      noop    => $graylog2::bool_noops,
+      noop    => $graylog2::noops,
     }
   }
 

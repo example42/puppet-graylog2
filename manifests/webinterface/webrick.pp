@@ -14,7 +14,7 @@ class graylog2::webinterface::webrick {
     name       => 'graylog2-webinterface',
     enable     => $graylog2::manage_service_enable,
     hasstatus  => true,
-    noop       => $graylog2::bool_noops,
+    noop       => $graylog2::noops,
   }
 
   file { '/etc/init.d/graylog2-webinterface':
@@ -25,7 +25,7 @@ class graylog2::webinterface::webrick {
     content => template($graylog2::webinterface_init_script_template),
     replace => $graylog2::manage_file_replace,
     audit   => $graylog2::manage_audit,
-    noop    => $graylog2::bool_noops,
+    noop    => $graylog2::noops,
     before  => Service['graylog2-webinterface'],
   }
 }

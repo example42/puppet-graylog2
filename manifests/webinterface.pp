@@ -19,7 +19,7 @@ class graylog2::webinterface {
       package { 'graylog2-webinterface':
         ensure => $graylog2::manage_package,
         name   => $graylog2::webinterface_package,
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
         before => File['graylog2-mongoid.yml'],
       }
     }
@@ -31,14 +31,14 @@ class graylog2::webinterface {
         extracted_dir       => $graylog2::webinterface_created_dirname,
         owner               => $graylog2::process_user,
         group               => $graylog2::process_group,
-        noop                => $graylog2::bool_noops,
+        noop                => $graylog2::noops,
         before              => File['graylog2-mongoid.yml'],
       }
 
       file { 'graylog2-webinterface_link':
         ensure => $graylog2::webinterface_home,
         path   => "${graylog2::install_destination}/graylog2-web-interface",
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
       }
     }
 
@@ -53,14 +53,14 @@ class graylog2::webinterface {
         user        => $graylog2::process_user,
         auto_deploy => true,
         enable      => true,
-        noop        => $graylog2::bool_noops,
+        noop        => $graylog2::noops,
         before      => File['graylog2-mongoid.yml'],
       }
 
       file { 'graylog2-webinterface_link':
         ensure => $graylog2::webinterface_home,
         path   => "${graylog2::install_destination}/graylog2-web-interface",
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
       }
     }
 
@@ -77,6 +77,6 @@ class graylog2::webinterface {
     content => template('graylog2/mongoid.yml.erb'),
     replace => $graylog2::manage_file_replace,
     audit   => $graylog2::manage_audit,
-    noop    => $graylog2::bool_noops,
+    noop    => $graylog2::noops,
   }
 }

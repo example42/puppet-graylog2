@@ -12,7 +12,7 @@ class graylog2::example42 {
       ensure    => $graylog2::manage_file,
       variables => $classvars,
       helper    => $graylog2::puppi_helper,
-      noop      => $graylog2::bool_noops,
+      noop      => $graylog2::noops,
     }
   }
 
@@ -26,7 +26,7 @@ class graylog2::example42 {
         target   => $graylog2::monitor_target,
         tool     => $graylog2::monitor_tool,
         enable   => $graylog2::manage_monitor,
-        noop     => $graylog2::bool_noops,
+        noop     => $graylog2::noops,
       }
     }
     if $graylog2::service != '' {
@@ -38,7 +38,7 @@ class graylog2::example42 {
         argument => $graylog2::process_args,
         tool     => $graylog2::monitor_tool,
         enable   => $graylog2::manage_monitor,
-        noop     => $graylog2::bool_noops,
+        noop     => $graylog2::noops,
       }
     }
   }
@@ -55,7 +55,7 @@ class graylog2::example42 {
       direction   => 'input',
       tool        => $graylog2::firewall_tool,
       enable      => $graylog2::manage_firewall,
-      noop        => $graylog2::bool_noops,
+      noop        => $graylog2::noops,
     }
   }
 

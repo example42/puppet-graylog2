@@ -19,7 +19,7 @@ class graylog2::install {
       package { 'graylog2':
         ensure => $graylog2::manage_package,
         name   => $graylog2::package,
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
       }
     }
 
@@ -33,13 +33,13 @@ class graylog2::install {
         extracted_dir       => $graylog2::created_dirname,
         owner               => $graylog2::process_user,
         group               => $graylog2::process_group,
-        noop                => $graylog2::bool_noops,
+        noop                => $graylog2::noops,
       }
 
       file { 'graylog2_link':
         ensure => $graylog2::home,
         path   => "${graylog2::install_destination}/graylog2",
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
       }
     }
 
@@ -54,13 +54,13 @@ class graylog2::install {
         user        => $graylog2::process_user,
         auto_deploy => true,
         enable      => true,
-        noop        => $graylog2::bool_noops,
+        noop        => $graylog2::noops,
       }
 
       file { 'graylog2_link':
         ensure => $graylog2::home,
         path   => "${graylog2::install_destination}/graylog2",
-        noop   => $graylog2::bool_noops,
+        noop   => $graylog2::noops,
       }
 
     }
