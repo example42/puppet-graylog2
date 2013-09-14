@@ -385,7 +385,7 @@ class graylog2 (
     default   => template($graylog2::template),
   }
 
-  ### Internal vars depending on user's input
+  ### Internal vars depending on user's input
   $real_install_source = $graylog2::install_source ? {
     ''      => "${graylog2::params::base_url_default}/graylog2-server/releases/download/${graylog2::version}/graylog2-server-${graylog2::version}.tar.gz",
     default => $graylog2::install_source,
@@ -428,7 +428,7 @@ class graylog2 (
 
   ### Managed resources
 
-  ### DEPENDENCIES class
+  ### DEPENDENCIES class
   if $graylog2::dependencies_class != '' {
     include $graylog2::dependencies_class
   }
@@ -464,7 +464,7 @@ class graylog2 (
     include $graylog2::my_class
   }
 
-  ### Example42 extensions
+  ### Example42 extensions
   if $graylog2::bool_puppi == true
   or $graylog2::bool_monitor == true
   or $graylog2::bool_firewall == true {

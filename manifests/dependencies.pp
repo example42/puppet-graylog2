@@ -25,7 +25,7 @@ class graylog2::dependencies {
       }
     } else {
       # Totally untested - Requires storeconfigs
-      # Collect on mongo_db_host with something like:
+      # Collect on mongo_db_host with something like:
       # Mongodb::User <<| tag == "mongo_user_${ipaddress}"|>>
       # Mongodb::User <<| tag == "mongo_user_${fqdn}"|>>
       @@mongodb::user { $graylog2::mongo_user:

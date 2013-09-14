@@ -35,7 +35,7 @@ $* Install graylog2 with default settings, that is installation from official si
           webinterface_install             => 'package',     # Default: source
           webinterface_package             => 'my-graylog2', # Default: graylog2-web-interface
           webinterface_install_destination => '/usr/local', # Default /opt
-          webinterface_webserver           => 'nginx',  # Default (and currently only supported) apache
+          webinterface_webserver           => 'nginx',  # Default (and currently only supported) apache
         }
 
 * Install only graylog2-server without web-interface
