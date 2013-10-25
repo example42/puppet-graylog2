@@ -1,5 +1,5 @@
 name 'example42-graylog2'
-version '2.0.13'
+version '2.0.14'
 
 author 'Alessandro Franceschi'
 license 'Apache2'
