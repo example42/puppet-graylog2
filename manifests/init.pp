@@ -385,6 +385,11 @@ class graylog2 (
     default   => template($graylog2::template),
   }
 
+  $manage_elasticsearchfile_content = $graylog2::elasticsearch_template ? {
+    ''        => undef,
+    default   => template($graylog2::elasticsearch_template),
+  }
+  
   ### Internal vars depending on user's input
   $real_install_source = $graylog2::install_source ? {
     ''      => "${graylog2::params::base_url_default}/graylog2-server/releases/download/${graylog2::version}/graylog2-server-${graylog2::version}.tar.gz",

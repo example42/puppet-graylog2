@@ -32,7 +32,7 @@ class graylog2::config {
     mode    => $graylog2::config_file_mode,
     owner   => $graylog2::config_file_owner,
     group   => $graylog2::config_file_group,
-    content => $graylog2::elasticsearch_content,
+    content => $graylog2::manage_elasticsearchfile_content,
     replace => $graylog2::manage_file_replace,
     audit   => $graylog2::manage_audit,
     noop    => $graylog2::noops,
