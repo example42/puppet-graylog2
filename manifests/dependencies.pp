@@ -6,7 +6,7 @@
 #
 # This class is not intended to be used directly.
 # It's automatically included by default in graylog2 by the parameter
-# dependencies_class. You may provide an laternative class name to
+# dependencies_class. You may provide an alternative class name to
 # provide the same resources (eventually not using Example42 modules)
 #
 class graylog2::dependencies {
